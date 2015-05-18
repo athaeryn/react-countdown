@@ -1,0 +1,40 @@
+{
+  "name": "react-countdown",
+  "version": "1.0.0",
+  "description": "A countdown wrapper component for React",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "browserify index.js -o bundle.js",
+    "watch": "watchify index.js -dvo bundle.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/athaeryn/react-countdown"
+  },
+  "keywords": [
+    "react",
+    "component",
+    "countdown"
+  ],
+  "author": "Mike Anderson",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/athaeryn/react-countdown/issues"
+  },
+  "homepage": "https://github.com/athaeryn/react-countdown",
+  "dependencies": {
+    "babel": "^5.4.3",
+    "babelify": "^6.1.1",
+    "browserify": "^10.2.0",
+    "watchify": "^3.2.1"
+  },
+  "peerDependencies": {
+    "react": "0.13.x"
+  },
+  "browserify": {
+    "transform": [
+     "babelify"
+    ]
+  }
+}
