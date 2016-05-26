@@ -15,6 +15,7 @@ class CountdownTestApp extends React.Component {
     super(props);
     this.handleEnd = this.handleEnd.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.addTwoSeconds = this.addTwoSeconds.bind(this);
     this.state = {
       countdownStarted: false
     };
@@ -28,11 +29,17 @@ class CountdownTestApp extends React.Component {
     this.setState({countdownStarted: true});
   }
 
-  render() {
+  addTwoSeconds () {
+    if (this.countdown) {
+      this.countdown.addTime(2)
+    }
+  }
+
+  render () {
     return (
-      <div>
+      <div onClick={this.addTwoSeconds}>
         { this.state.countdownStarted
-            ? (<Countdown onComplete={this.handleEnd}>
+            ? (<Countdown ref={(c) => { this.countdown = c }} onComplete={this.handleEnd}>
                 <CountdownOverlay />
               </Countdown>)
             : null }

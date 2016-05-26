@@ -9,16 +9,30 @@ var Countdown = React.createClass({
     }
   },
 
-  componentDidMount: function () {
+  addTime: function (seconds) {
+    this.stopCountdown()
+    this.setState({ count: this.state.count + seconds })
+    this.startCountdown()
+  },
+
+  startCountdown: function () {
     this.interval = setInterval(function () {
-      let count = this.state.count - 1;
+      let count = this.state.count - 1
       if (count === 0) {
-        clearInterval(this.state._interval)
+        this.stopCountdown()
         this.props.onComplete()
       } else {
         this.setState({count})
       }
     }.bind(this), 1000)
+  },
+
+  stopCountdown: function () {
+    clearInterval(this.interval)
+  },
+
+  componentDidMount: function () {
+    this.startCountdown()
   },
 
   componentWillUnmount: function () {
