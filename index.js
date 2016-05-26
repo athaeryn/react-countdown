@@ -1,53 +1,48 @@
-import React from 'react';
-import cloneWithProps from 'react/lib/cloneWithProps';
+var React = require('react')
 
+var Countdown = React.createClass({
+  interval: undefined,
 
-class Countdown extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      count: this.props.count,
-      _interval: null
-    };
-  }
-
-  componentDidMount() {
-    this.state._interval = setInterval(() => {
-      let count = this.state.count - 1;
-      if (count == 0) {
-        clearInterval(this.state._interval);
-        this.props.onComplete();
-      } else {
-        this.setState({count});
-      }
-    }, 1000);
-  }
-
-  renderContents() {
-    if (this.props.children) {
-      return cloneWithProps(
-        this.props.children,
-        { count: this.state.count }
-      );
-    } else {
-      return this.state.count;
+  getInitialState: function () {
+    return {
+      count: this.props.count
     }
-  }
+  },
 
-  render() {
-    return <div>{this.renderContents()}</div>;
+  componentDidMount: function () {
+    this.interval = setInterval(function () {
+      let count = this.state.count - 1;
+      if (count === 0) {
+        clearInterval(this.state._interval)
+        this.props.onComplete()
+      } else {
+        this.setState({count})
+      }
+    }.bind(this), 1000)
+  },
+
+  componentWillUnmount: function () {
+    clearInterval(this.interval)
+  },
+
+  render: function () {
+    if (!this.props.children) {
+      throw new Error("No child supplied to <Countdown>!")
+    }
+    return React.cloneElement(this.props.children, {
+      count: this.state.count
+    })
   }
-}
+})
 
 Countdown.defaultProps = {
   count: 3,
-  onComplete: () => {}
-};
+  onComplete: function () {}
+}
 
 Countdown.propTypes = {
   count: React.PropTypes.number,
   onComplete: React.PropTypes.func
-};
+}
 
-export default Countdown;
+module.exports = Countdown

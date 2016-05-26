@@ -4,7 +4,7 @@
   "description": "A countdown wrapper component for React",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:test": "browserify test.js -o testbundle.js",
     "build": "browserify index.js -o bundle.js",
     "watch": "watchify index.js -dvo bundle.js"
   },
@@ -23,14 +23,13 @@
     "url": "https://github.com/athaeryn/react-countdown/issues"
   },
   "homepage": "https://github.com/athaeryn/react-countdown",
-  "dependencies": {
+  "devDependencies": {
     "babel": "^5.4.3",
     "babelify": "^6.1.1",
     "browserify": "^10.2.0",
-    "watchify": "^3.2.1"
-  },
-  "peerDependencies": {
-    "react": "0.13.x"
+    "watchify": "^3.2.1",
+    "react": "15.0.2",
+    "react-dom": "15.0.2"
   },
   "browserify": {
     "transform": [

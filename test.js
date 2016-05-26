@@ -1,4 +1,5 @@
 import React from "react";
+import { render } from "react-dom";
 import Countdown from "./index";
 
 
@@ -47,7 +48,7 @@ class CountdownTestApp extends React.Component {
 document.addEventListener(
   "DOMContentLoaded",
   () => {
-    React.render(
+    render(
       <CountdownTestApp />,
       document.getElementById("container")
     );
